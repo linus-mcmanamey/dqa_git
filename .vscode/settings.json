@@ -1,0 +1,42 @@
+{
+    "files.autoSave": "onFocusChange",
+    "git.enableCommitSigning": false,
+    "git.alwaysShowStagedChangesResourceGroup": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.showProgress": true,
+    "git.verboseCommit": true,
+    "git.useIntegratedTerminal": true,
+    "git.terminalAuthentication": true,
+    "git.allowForcePush": false,
+    "git.postCommitCommand": "none",
+    "git.enableSmartCommit": true,
+    "git.smartCommitChanges": "all",
+    "git.useCommitInputAsStashMessage": true,
+    "git.openRepositoryInParentFolders": "never",
+    "git.experimental.generateCommitMessagePrompt": "Write a concise commit message following conventional commit format (feat:, fix:, docs:, style:, refactor:, test:, chore:) based on the staged changes. Keep it under 50 characters for the subject line.",
+    "git.inputValidation": true,
+    "git.inputValidationLength": 72,
+    "git.inputValidationSubjectLength": 50,
+    "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.env.linux": {
+        "PATH": "${env:PATH}:/usr/local/bin"
+    },
+    "chat.mcp.serverSampling": {
+        "unify_2_1_dm_pipeline/.vscode/mcp.json: github": {
+            "allowedModels": [
+                "github.copilot-chat/claude-sonnet-4"
+            ]
+        }
+    },
+    "mcp.rules": [
+        {
+            "match": "when the user asks about PySpark, Spark, Apache Spark, DataFrame operations, Spark SQL, or Spark configuration",
+            "tool": "context7"
+        },
+        {
+            "match": "when the user requests code examples, setup or configuration steps, or library/API documentation for Python data processing",
+            "tool": "context7"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+[
+    {
+        "key": "ctrl+shift+g ctrl+shift+c",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "git add -A && git commit --allow-empty-message --edit\n"
+        },
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+g ctrl+shift+m",
+        "command": "git.commitStaged",
+        "when": "gitOpenRepositoryCount != 0"
+    },
+    {
+        "key": "ctrl+shift+g ctrl+shift+a",
+        "command": "git.commitAll",
+        "when": "gitOpenRepositoryCount != 0"
+    }
+]

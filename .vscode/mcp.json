@@ -1,0 +1,52 @@
+{
+	"servers": {
+		"github": {
+			"type": "http",
+			"url": "https://api.githubcopilot.com/mcp/",
+			"headers": {
+				"Authorization": "Bearer ${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+			}
+		},
+		"ado": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@azure-devops/mcp",
+				"emstas"
+			],
+			"env": {
+				"AZURE_DEVOPS_PAT": "${env:AZURE_DEVOPS_PAT}",
+				"AZURE_DEVOPS_ORG_URL": "${env:AZURE_DEVOPS_ORG_URL}",
+				"AZURE_DEVOPS_PROJECT": "${env:AZURE_DEVOPS_PROJECT}"
+			}
+		},
+		"sequential-thinking": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-sequential-thinking"
+			]
+		},
+		"desktop-commander": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@wonderwhy-er/desktop-commander"
+			]
+		},
+		"memory": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-memory"
+			],
+			"env": {
+				"MEMORY_FILE_PATH": "./memory.jsonl"
+			}
+		}
+	}
+}

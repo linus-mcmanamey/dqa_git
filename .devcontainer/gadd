@@ -1,0 +1,31 @@
+#!/bin/bash
+# Enhanced git add with automatic ruff formatting
+# Usage: ./gadd <files>
+
+# Add files to git
+git add "$@"
+
+# Get list of staged Python files
+PYTHON_FILES=$(git diff --cached --name-only --diff-filter=AM "*.py")
+
+if [ -n "$PYTHON_FILES" ]; then
+    echo "🔍 Running ruff on staged Python files:"
+    echo "$PYTHON_FILES"
+
+    # Run ruff fix and format directly on the files
+    echo "$PYTHON_FILES" | tr '\n' '\0' | xargs -0 ruff check --fix
+    echo "$PYTHON_FILES" | tr '\n' '\0' | xargs -0 ruff format
+
+    # Run file fixers on all staged files
+    echo "🔧 Running file fixers..."
+    pre-commit run --hook-stage manual trailing-whitespace --files $(git diff --cached --name-only --diff-filter=AM) 2>/dev/null || true
+    pre-commit run --hook-stage manual end-of-file-fixer --files $(git diff --cached --name-only --diff-filter=AM) 2>/dev/null || true
+    pre-commit run --hook-stage manual fix-byte-order-marker --files $(git diff --cached --name-only --diff-filter=AM) 2>/dev/null || true
+
+    # Re-add all the formatted files
+    git add "$@"
+
+    echo "✅ Ruff formatting applied and files re-staged"
+else
+    echo "✅ Files added (no Python files to format)"
+fi
